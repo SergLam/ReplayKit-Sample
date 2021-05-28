@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17132" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="19115.2" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17132"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="19115.2"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -708,91 +708,172 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="ReplayKitSample" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="288"/>
+                        <rect key="frame" x="0.0" y="0.0" width="489" height="288"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SiK-Ho-FYo">
-                                <rect key="frame" x="13" y="13" width="141" height="32"/>
-                                <buttonCell key="cell" type="push" title="Start Recording" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Qdz-NJ-7yz">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="recordButtonTapped:" target="XfG-lQ-9wD" id="Way-wv-vcO"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UZ6-RF-w9C">
-                                <rect key="frame" x="176" y="13" width="128" height="32"/>
-                                <buttonCell key="cell" type="push" title="Start Capture" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="y1u-uA-hew">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="captureButtonTapped:" target="XfG-lQ-9wD" id="Q41-1Z-7D6"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="THw-uQ-X6V">
-                                <rect key="frame" x="326" y="13" width="141" height="32"/>
-                                <buttonCell key="cell" type="push" title="Start Broadcast" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ol1-hg-ShV">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="broadcastButtonTapped:" target="XfG-lQ-9wD" id="NdX-pc-oNA"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="805-bk-flP">
-                                <rect key="frame" x="18" y="66" width="73" height="18"/>
-                                <buttonCell key="cell" type="check" title="Camera" bezelStyle="regularSquare" imagePosition="left" inset="2" id="8km-vQ-MSp">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="cameraButtonTapped:" target="XfG-lQ-9wD" id="WCB-Ec-08w"/>
-                                </connections>
-                            </button>
+                            <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="25" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dfy-lH-ijO">
+                                <rect key="frame" x="15" y="20" width="459" height="65"/>
+                                <subviews>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="bottom" spacing="200" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0Ge-lY-4Gx">
+                                        <rect key="frame" x="0.0" y="45" width="459" height="20"/>
+                                        <subviews>
+                                            <stackView distribution="fillProportionally" orientation="horizontal" alignment="top" spacing="5" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VdE-nK-0Ft">
+                                                <rect key="frame" x="0.0" y="0.0" width="189" height="16"/>
+                                                <subviews>
+                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="805-bk-flP">
+                                                        <rect key="frame" x="-2" y="-1" width="80" height="18"/>
+                                                        <buttonCell key="cell" type="check" title="Camera" bezelStyle="regularSquare" imagePosition="left" inset="2" id="8km-vQ-MSp">
+                                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <connections>
+                                                            <action selector="cameraButtonTapped:" target="XfG-lQ-9wD" id="WCB-Ec-08w"/>
+                                                        </connections>
+                                                    </button>
+                                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GKM-F1-rHH">
+                                                        <rect key="frame" x="81" y="-1" width="108" height="18"/>
+                                                        <buttonCell key="cell" type="check" title="Microphone" bezelStyle="regularSquare" imagePosition="left" inset="2" id="1uH-ob-eSU">
+                                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                            <font key="font" metaFont="system"/>
+                                                        </buttonCell>
+                                                        <connections>
+                                                            <action selector="microphoneButtonTapped:" target="XfG-lQ-9wD" id="ve6-A0-6pb"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="189" id="dX7-Ab-Pkn"/>
+                                                </constraints>
+                                                <visibilityPriorities>
+                                                    <integer value="1000"/>
+                                                    <integer value="1000"/>
+                                                </visibilityPriorities>
+                                                <customSpacing>
+                                                    <real value="3.4028234663852886e+38"/>
+                                                    <real value="3.4028234663852886e+38"/>
+                                                </customSpacing>
+                                            </stackView>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MZM-BL-Dof">
+                                                <rect key="frame" x="382" y="-7" width="84" height="32"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="70" id="OII-wJ-VMb"/>
+                                                </constraints>
+                                                <buttonCell key="cell" type="push" title="Get Clip" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="FEe-nG-f0Y">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="generateClipPressed:" target="XfG-lQ-9wD" id="6JA-bX-R84"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstItem="MZM-BL-Dof" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="VdE-nK-0Ft" secondAttribute="trailing" constant="20" id="MHu-cA-ttT"/>
+                                            <constraint firstAttribute="trailing" secondItem="MZM-BL-Dof" secondAttribute="trailing" id="fPq-y8-vpX"/>
+                                        </constraints>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
+                                    <stackView distribution="fillEqually" orientation="horizontal" alignment="bottom" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ubw-GD-ECw">
+                                        <rect key="frame" x="0.0" y="0.0" width="459" height="20"/>
+                                        <subviews>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SiK-Ho-FYo">
+                                                <rect key="frame" x="-7" y="-7" width="130" height="32"/>
+                                                <buttonCell key="cell" type="push" title="Start Recording" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Qdz-NJ-7yz">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="recordButtonTapped:" target="XfG-lQ-9wD" id="Way-wv-vcO"/>
+                                                </connections>
+                                            </button>
+                                            <button horizontalHuggingPriority="249" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UZ6-RF-w9C">
+                                                <rect key="frame" x="121" y="-7" width="121" height="32"/>
+                                                <buttonCell key="cell" type="push" title="Start Capture" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="y1u-uA-hew">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="captureButtonTapped:" target="XfG-lQ-9wD" id="Q41-1Z-7D6"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="THw-uQ-X6V">
+                                                <rect key="frame" x="240" y="-7" width="130" height="32"/>
+                                                <buttonCell key="cell" type="push" title="Start Broadcast" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ol1-hg-ShV">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="broadcastButtonTapped:" target="XfG-lQ-9wD" id="NdX-pc-oNA"/>
+                                                </connections>
+                                            </button>
+                                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="U7i-l8-9Gm">
+                                                <rect key="frame" x="368" y="-7" width="98" height="32"/>
+                                                <buttonCell key="cell" type="push" title="Start Clips" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Fvk-1Z-D9g">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="clipButtonTapped:" target="XfG-lQ-9wD" id="VbY-c3-cC9"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="0Ge-lY-4Gx" secondAttribute="trailing" id="W9A-Fu-wzA"/>
+                                    <constraint firstItem="0Ge-lY-4Gx" firstAttribute="leading" secondItem="Dfy-lH-ijO" secondAttribute="leading" id="r4c-Rb-Puc"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tgK-Yz-mT3">
-                                <rect key="frame" x="141" y="145" width="198" height="56"/>
+                                <rect key="frame" x="146" y="145" width="198" height="56"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" title="ReplayKit" id="F6o-Q4-Hv0">
                                     <font key="font" metaFont="system" size="48"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GKM-F1-rHH">
-                                <rect key="frame" x="181" y="66" width="98" height="18"/>
-                                <buttonCell key="cell" type="check" title="Microphone" bezelStyle="regularSquare" imagePosition="left" inset="2" id="1uH-ob-eSU">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="microphoneButtonTapped:" target="XfG-lQ-9wD" id="ve6-A0-6pb"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="SiK-Ho-FYo" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" symbolic="YES" id="3kX-K6-RDz"/>
-                            <constraint firstAttribute="bottom" secondItem="SiK-Ho-FYo" secondAttribute="bottom" constant="20" symbolic="YES" id="4d5-H0-dtW"/>
-                            <constraint firstItem="GKM-F1-rHH" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="805-bk-flP" secondAttribute="trailing" constant="8" symbolic="YES" id="Ea9-DF-ZrQ"/>
-                            <constraint firstItem="SiK-Ho-FYo" firstAttribute="top" secondItem="805-bk-flP" secondAttribute="bottom" constant="27" id="J2E-bH-1dj"/>
-                            <constraint firstItem="UZ6-RF-w9C" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="NL7-mc-TpM"/>
+                            <constraint firstAttribute="trailing" secondItem="Dfy-lH-ijO" secondAttribute="trailing" constant="15" id="1XN-ua-OpN"/>
+                            <constraint firstItem="Dfy-lH-ijO" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="15" id="Heb-S3-vSD"/>
                             <constraint firstItem="tgK-Yz-mT3" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" multiplier="0.8" id="NvH-ag-vaF"/>
-                            <constraint firstAttribute="trailing" secondItem="THw-uQ-X6V" secondAttribute="trailing" constant="20" symbolic="YES" id="Nzp-Md-8Pm"/>
-                            <constraint firstItem="UZ6-RF-w9C" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="SiK-Ho-FYo" secondAttribute="trailing" constant="12" symbolic="YES" id="OgW-r7-GaG"/>
-                            <constraint firstItem="THw-uQ-X6V" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="UZ6-RF-w9C" secondAttribute="trailing" constant="12" symbolic="YES" id="UiB-x4-QHN"/>
-                            <constraint firstAttribute="bottom" secondItem="THw-uQ-X6V" secondAttribute="bottom" constant="20" symbolic="YES" id="VCF-KU-mzm"/>
                             <constraint firstItem="tgK-Yz-mT3" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="b94-sN-xbJ"/>
-                            <constraint firstItem="UZ6-RF-w9C" firstAttribute="centerY" secondItem="SiK-Ho-FYo" secondAttribute="centerY" id="jfa-52-pNa"/>
-                            <constraint firstItem="GKM-F1-rHH" firstAttribute="centerY" secondItem="805-bk-flP" secondAttribute="centerY" id="k2Z-TR-21C"/>
-                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="GKM-F1-rHH" secondAttribute="trailing" constant="20" symbolic="YES" id="rNU-Uf-ASb"/>
-                            <constraint firstItem="805-bk-flP" firstAttribute="leading" secondItem="SiK-Ho-FYo" secondAttribute="leading" id="vjz-te-86X"/>
-                            <constraint firstItem="GKM-F1-rHH" firstAttribute="leading" secondItem="UZ6-RF-w9C" secondAttribute="leading" id="xAh-Ql-uNd"/>
+                            <constraint firstAttribute="bottom" secondItem="Dfy-lH-ijO" secondAttribute="bottom" constant="20" symbolic="YES" id="zwZ-FT-FhB"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="broadcastButton" destination="THw-uQ-X6V" id="Yoa-C6-Kvw"/>
                         <outlet property="cameraCheckBox" destination="805-bk-flP" id="LbN-fk-1eu"/>
                         <outlet property="captureButton" destination="UZ6-RF-w9C" id="WIK-Ep-MpP"/>
+                        <outlet property="clipButton" destination="U7i-l8-9Gm" id="p6Q-Zt-G0Q"/>
+                        <outlet property="getClipButton" destination="MZM-BL-Dof" id="tdW-Ub-Y9i"/>
                         <outlet property="microphoneCheckBox" destination="GKM-F1-rHH" id="10Z-Ta-Xz9"/>
                         <outlet property="recordButton" destination="SiK-Ho-FYo" id="q4q-Nc-5jh"/>
                     </connections>
