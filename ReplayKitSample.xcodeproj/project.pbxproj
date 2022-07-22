@@ -7,19 +7,27 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		04EB7E56288B0B560046729E /* AppMenuProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EB7E55288B0B560046729E /* AppMenuProvider.swift */; };
+		04EB7E59288B0BEB0046729E /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EB7E58288B0BEB0046729E /* AppConstants.swift */; };
+		04EB7E5C288B0CF70046729E /* AppMenuKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EB7E5B288B0CF70046729E /* AppMenuKeys.swift */; };
+		04EB7E5E288B190E0046729E /* MainViewControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EB7E5D288B190E0046729E /* MainViewControllerView.swift */; };
 		F36C2BFE2476FFC500462C2D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36C2BFD2476FFC500462C2D /* AppDelegate.swift */; };
-		F36C2C002476FFC500462C2D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36C2BFF2476FFC500462C2D /* ViewController.swift */; };
+		F36C2C002476FFC500462C2D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36C2BFF2476FFC500462C2D /* MainViewController.swift */; };
 		F36C2C022476FFC700462C2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F36C2C012476FFC700462C2D /* Assets.xcassets */; };
 		F36C2C052476FFC700462C2D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F36C2C032476FFC700462C2D /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4DD1CB177BA5E840FA985C52 /* SampleCode.xcconfig */ = {isa = PBXFileReference; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
-		BA9F9C9000E9BE4366CA806C /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE.txt; sourceTree = "<group>"; };
+		04EB7E55288B0B560046729E /* AppMenuProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMenuProvider.swift; sourceTree = "<group>"; };
+		04EB7E58288B0BEB0046729E /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
+		04EB7E5B288B0CF70046729E /* AppMenuKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMenuKeys.swift; sourceTree = "<group>"; };
+		04EB7E5D288B190E0046729E /* MainViewControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerView.swift; sourceTree = "<group>"; };
+		4DD1CB177BA5E840FA985C52 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
+		BA9F9C9000E9BE4366CA806C /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		D8EFC62F4F841C125FF56860 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F36C2BFA2476FFC500462C2D /* ReplayKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReplayKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F36C2BFD2476FFC500462C2D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F36C2BFF2476FFC500462C2D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F36C2BFF2476FFC500462C2D /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F36C2C012476FFC700462C2D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F36C2C042476FFC700462C2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F36C2C062476FFC700462C2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -37,6 +45,60 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04EB7E51288AFAF30046729E /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				F36C2C032476FFC700462C2D /* Main.storyboard */,
+				F36C2C012476FFC700462C2D /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		04EB7E52288AFB0A0046729E /* BundleFiles */ = {
+			isa = PBXGroup;
+			children = (
+				F36C2C062476FFC700462C2D /* Info.plist */,
+				F36C2C072476FFC700462C2D /* ReplayKitSample.entitlements */,
+			);
+			path = BundleFiles;
+			sourceTree = "<group>";
+		};
+		04EB7E53288AFB8F0046729E /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				04EB7E5A288B0CD90046729E /* AppMenu */,
+				04EB7E57288B0BDF0046729E /* Constants */,
+				F36C2BFD2476FFC500462C2D /* AppDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		04EB7E54288AFB9D0046729E /* UserStory */ = {
+			isa = PBXGroup;
+			children = (
+				F36C2BFF2476FFC500462C2D /* MainViewController.swift */,
+				04EB7E5D288B190E0046729E /* MainViewControllerView.swift */,
+			);
+			path = UserStory;
+			sourceTree = "<group>";
+		};
+		04EB7E57288B0BDF0046729E /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				04EB7E58288B0BEB0046729E /* AppConstants.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		04EB7E5A288B0CD90046729E /* AppMenu */ = {
+			isa = PBXGroup;
+			children = (
+				04EB7E55288B0B560046729E /* AppMenuProvider.swift */,
+				04EB7E5B288B0CF70046729E /* AppMenuKeys.swift */,
+			);
+			path = AppMenu;
+			sourceTree = "<group>";
+		};
 		71F970708108BB3CB4A8F62C /* Configuration */ = {
 			isa = PBXGroup;
 			children = (
@@ -50,7 +112,6 @@
 			children = (
 				BA9F9C9000E9BE4366CA806C /* LICENSE.txt */,
 			);
-			name = LICENSE;
 			path = LICENSE;
 			sourceTree = "<group>";
 		};
@@ -76,12 +137,10 @@
 		F36C2BFC2476FFC500462C2D /* ReplayKitSample */ = {
 			isa = PBXGroup;
 			children = (
-				F36C2BFD2476FFC500462C2D /* AppDelegate.swift */,
-				F36C2BFF2476FFC500462C2D /* ViewController.swift */,
-				F36C2C012476FFC700462C2D /* Assets.xcassets */,
-				F36C2C032476FFC700462C2D /* Main.storyboard */,
-				F36C2C062476FFC700462C2D /* Info.plist */,
-				F36C2C072476FFC700462C2D /* ReplayKitSample.entitlements */,
+				04EB7E54288AFB9D0046729E /* UserStory */,
+				04EB7E53288AFB8F0046729E /* Application */,
+				04EB7E52288AFB0A0046729E /* BundleFiles */,
+				04EB7E51288AFAF30046729E /* Resources */,
 			);
 			path = ReplayKitSample;
 			sourceTree = "<group>";
@@ -156,8 +215,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F36C2C002476FFC500462C2D /* ViewController.swift in Sources */,
+				04EB7E56288B0B560046729E /* AppMenuProvider.swift in Sources */,
+				F36C2C002476FFC500462C2D /* MainViewController.swift in Sources */,
+				04EB7E5E288B190E0046729E /* MainViewControllerView.swift in Sources */,
 				F36C2BFE2476FFC500462C2D /* AppDelegate.swift in Sources */,
+				04EB7E5C288B0CF70046729E /* AppMenuKeys.swift in Sources */,
+				04EB7E59288B0BEB0046729E /* AppConstants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,12 +360,12 @@
 			baseConfigurationReference = 4DD1CB177BA5E840FA985C52 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = ReplayKitSample/ReplayKitSample.entitlements;
+				CODE_SIGN_ENTITLEMENTS = ReplayKitSample/BundleFiles/ReplayKitSample.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = ReplayKitSample/Info.plist;
+				DEVELOPMENT_TEAM = MDWBDEPC5G;
+				INFOPLIST_FILE = ReplayKitSample/BundleFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -321,12 +384,12 @@
 			baseConfigurationReference = 4DD1CB177BA5E840FA985C52 /* SampleCode.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = ReplayKitSample/ReplayKitSample.entitlements;
+				CODE_SIGN_ENTITLEMENTS = ReplayKitSample/BundleFiles/ReplayKitSample.entitlements;
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = ReplayKitSample/Info.plist;
+				DEVELOPMENT_TEAM = MDWBDEPC5G;
+				INFOPLIST_FILE = ReplayKitSample/BundleFiles/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",

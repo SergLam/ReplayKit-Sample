@@ -9,20 +9,20 @@ import Cocoa
 import ReplayKit
 import Photos
 
-class ViewController: NSViewController,
+final class MainViewController: NSViewController,
                       RPScreenRecorderDelegate,
                       RPPreviewViewControllerDelegate,
                       RPBroadcastControllerDelegate,
                       RPBroadcastActivityControllerDelegate {
     
     // IBOutlets for the record, capture, and broadcast buttons.
-    @IBOutlet var recordButton: NSButton!
-    @IBOutlet var captureButton: NSButton!
-    @IBOutlet var broadcastButton: NSButton!
-    @IBOutlet var cameraCheckBox: NSButton!
-    @IBOutlet var microphoneCheckBox: NSButton!
-    @IBOutlet var clipButton: NSButton!
-    @IBOutlet var getClipButton: NSButton!
+    @IBOutlet private var recordButton: NSButton!
+    @IBOutlet private var captureButton: NSButton!
+    @IBOutlet private var broadcastButton: NSButton!
+    @IBOutlet private var cameraCheckBox: NSButton!
+    @IBOutlet private var microphoneCheckBox: NSButton!
+    @IBOutlet private var clipButton: NSButton!
+    @IBOutlet private var getClipButton: NSButton!
     
     // Internal state variables.
     private var isActive = false
