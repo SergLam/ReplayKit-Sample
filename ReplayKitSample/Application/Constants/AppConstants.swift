@@ -11,4 +11,6 @@ import Foundation
 struct AppConstants {
     
     static let appName = "ReplayKitSample"
+    
+    static let previewDevices: [String] = ["My Mac"]
 }

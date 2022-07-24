@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0426A4DB288DD83400F981BB /* NSViewControllerPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0426A4D9288DD83400F981BB /* NSViewControllerPreview.swift */; };
+		0426A4DC288DD83400F981BB /* NSViewPreview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0426A4DA288DD83400F981BB /* NSViewPreview.swift */; };
 		04EB7E56288B0B560046729E /* AppMenuProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EB7E55288B0B560046729E /* AppMenuProvider.swift */; };
 		04EB7E59288B0BEB0046729E /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EB7E58288B0BEB0046729E /* AppConstants.swift */; };
 		04EB7E5C288B0CF70046729E /* AppMenuKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EB7E5B288B0CF70046729E /* AppMenuKeys.swift */; };
@@ -19,6 +21,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0426A4D9288DD83400F981BB /* NSViewControllerPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSViewControllerPreview.swift; sourceTree = "<group>"; };
+		0426A4DA288DD83400F981BB /* NSViewPreview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSViewPreview.swift; sourceTree = "<group>"; };
 		04EB7E55288B0B560046729E /* AppMenuProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMenuProvider.swift; sourceTree = "<group>"; };
 		04EB7E58288B0BEB0046729E /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		04EB7E5B288B0CF70046729E /* AppMenuKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMenuKeys.swift; sourceTree = "<group>"; };
@@ -47,6 +51,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		044A5F44288DD71D007258E3 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				044A5F45288DD723007258E3 /* UI */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		044A5F45288DD723007258E3 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				044A5F46288DD727007258E3 /* SwiftUIPreview */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		044A5F46288DD727007258E3 /* SwiftUIPreview */ = {
+			isa = PBXGroup;
+			children = (
+				0426A4D9288DD83400F981BB /* NSViewControllerPreview.swift */,
+				0426A4DA288DD83400F981BB /* NSViewPreview.swift */,
+			);
+			path = SwiftUIPreview;
+			sourceTree = "<group>";
+		};
 		04EB7E51288AFAF30046729E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +193,7 @@
 		F36C2BFC2476FFC500462C2D /* ReplayKitSample */ = {
 			isa = PBXGroup;
 			children = (
+				044A5F44288DD71D007258E3 /* Services */,
 				04EB7E54288AFB9D0046729E /* UserStory */,
 				04EB7E53288AFB8F0046729E /* Application */,
 				04EB7E52288AFB0A0046729E /* BundleFiles */,
@@ -247,8 +277,10 @@
 				F36C2C002476FFC500462C2D /* MainViewController.swift in Sources */,
 				04EB7E5E288B190E0046729E /* MainViewControllerView.swift in Sources */,
 				F36C2BFE2476FFC500462C2D /* AppDelegate.swift in Sources */,
+				0426A4DC288DD83400F981BB /* NSViewPreview.swift in Sources */,
 				04EB7E5C288B0CF70046729E /* AppMenuKeys.swift in Sources */,
 				04EB7E59288B0BEB0046729E /* AppConstants.swift in Sources */,
+				0426A4DB288DD83400F981BB /* NSViewControllerPreview.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

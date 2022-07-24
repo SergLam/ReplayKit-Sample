@@ -31,6 +31,25 @@ final class MainViewController: NSViewController,
     private var broadcastControl: RPBroadcastController!
     private var cameraView: NSView?
     
+    private let contentView: MainViewControllerView = MainViewControllerView(frame: NSRect.zero)
+    
+    // MARK: - Life cycle
+    deinit {
+        
+    }
+    
+    init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func loadView() {
+        view = contentView
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -548,3 +567,33 @@ final class MainViewController: NSViewController,
     }
 }
 
+#if DEBUG
+import SwiftUI
+
+@available(iOS 13.0, *)
+struct MainViewController_Previews: PreviewProvider {
+    
+    static var devices = AppConstants.previewDevices
+    
+    static var platform: PreviewPlatform? {
+        return SwiftUI.PreviewPlatform.macOS
+    }
+    
+    static var previews: some SwiftUI.View {
+        
+        ForEach(devices, id: \.self) { deviceName in
+            Group {
+                
+                NSViewControllerPreview {
+                    
+                    let vc = MainViewController()
+                    return vc
+                }
+                
+            }.previewDevice(PreviewDevice(rawValue: deviceName))
+            .previewDisplayName(deviceName)
+        }
+        
+    }
+}
+#endif

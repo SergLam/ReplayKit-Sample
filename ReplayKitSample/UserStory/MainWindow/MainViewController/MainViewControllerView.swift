@@ -25,6 +25,9 @@ final class MainViewControllerView: NSView {
     
     weak var delegate: MainViewControllerViewDelegate?
     
+    private let titleField: NSTextField = NSTextField(labelWithString: "ReplayKit")
+    private let titleFieldText: String = "ReplayKit"
+    
     private let mainVStack: NSStackView = NSStackView(frame: NSRect.zero)
     private let mainVStackSpacing: CGFloat = 5.0
     
@@ -143,6 +146,14 @@ final class MainViewControllerView: NSView {
     
     private func setupLayout() {
         
+        addSubview(titleField)
+        
+        titleField.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            titleField.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            titleField.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0.8)
+        ])
+        
         addSubview(mainVStack)
         mainVStack.orientation = .vertical
         mainVStack.alignment = .leading
@@ -198,7 +209,20 @@ final class MainViewControllerView: NSView {
         topButtonsStack.addArrangedSubview(microphoneCheckBox)
         microphoneCheckBox.title = microphoneCheckBoxTitle
         
+        topButtonsStack.addArrangedSubview(getClipButtonStack)
+        getClipButtonStack.orientation = .horizontal
+        bottomButtonsStack.alignment = .trailing
+        bottomButtonsStack.distribution = .fill
+        bottomButtonsStack.spacing = mainVStackSpacing
         
+        getClipButtonStack.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            getClipButtonStack.leadingAnchor.constraint(equalTo: microphoneCheckBox.trailingAnchor),
+            getClipButtonStack.trailingAnchor.constraint(equalTo: getClipButtonStack.trailingAnchor)
+        ])
+        
+        getClipButtonStack.addArrangedSubview(getClipButton)
+        getClipButton.title = getClipButtonTitle
     }
     
     // MARK: - Actions
@@ -237,3 +261,34 @@ final class MainViewControllerView: NSView {
         delegate?.didTapClipButton()
     }
 }
+
+#if DEBUG
+import SwiftUI
+
+@available(iOS 13.0, *)
+struct MainViewControllerView_Previews: PreviewProvider {
+    
+    static var devices = AppConstants.previewDevices
+    
+    static var platform: PreviewPlatform? {
+        return SwiftUI.PreviewPlatform.macOS
+    }
+    
+    static var previews: some SwiftUI.View {
+        
+        ForEach(devices, id: \.self) { deviceName in
+            VStack(alignment: .center, spacing: 10) {
+                
+                NSViewPreview {
+                    return MainViewControllerView(frame: NSRect.zero)
+                }
+                .frame(minWidth: 480, maxWidth: .infinity, minHeight: 270.0, maxHeight: .infinity, alignment: .center)
+                
+            }
+            .previewDevice(PreviewDevice(rawValue: deviceName))
+            .previewDisplayName(deviceName)
+        }
+        
+    }
+}
+#endif
