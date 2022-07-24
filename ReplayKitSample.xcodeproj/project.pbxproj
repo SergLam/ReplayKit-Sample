@@ -11,6 +11,7 @@
 		04EB7E59288B0BEB0046729E /* AppConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EB7E58288B0BEB0046729E /* AppConstants.swift */; };
 		04EB7E5C288B0CF70046729E /* AppMenuKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EB7E5B288B0CF70046729E /* AppMenuKeys.swift */; };
 		04EB7E5E288B190E0046729E /* MainViewControllerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EB7E5D288B190E0046729E /* MainViewControllerView.swift */; };
+		04EB7E63288C8F820046729E /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EB7E62288C8F820046729E /* MainWindowController.swift */; };
 		F36C2BFE2476FFC500462C2D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36C2BFD2476FFC500462C2D /* AppDelegate.swift */; };
 		F36C2C002476FFC500462C2D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F36C2BFF2476FFC500462C2D /* MainViewController.swift */; };
 		F36C2C022476FFC700462C2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F36C2C012476FFC700462C2D /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 		04EB7E58288B0BEB0046729E /* AppConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConstants.swift; sourceTree = "<group>"; };
 		04EB7E5B288B0CF70046729E /* AppMenuKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppMenuKeys.swift; sourceTree = "<group>"; };
 		04EB7E5D288B190E0046729E /* MainViewControllerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewControllerView.swift; sourceTree = "<group>"; };
+		04EB7E62288C8F820046729E /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		4DD1CB177BA5E840FA985C52 /* SampleCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = SampleCode.xcconfig; path = Configuration/SampleCode.xcconfig; sourceTree = "<group>"; };
 		BA9F9C9000E9BE4366CA806C /* LICENSE.txt */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		D8EFC62F4F841C125FF56860 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -76,8 +78,7 @@
 		04EB7E54288AFB9D0046729E /* UserStory */ = {
 			isa = PBXGroup;
 			children = (
-				F36C2BFF2476FFC500462C2D /* MainViewController.swift */,
-				04EB7E5D288B190E0046729E /* MainViewControllerView.swift */,
+				04EB7E5F288C84E20046729E /* MainWindow */,
 			);
 			path = UserStory;
 			sourceTree = "<group>";
@@ -97,6 +98,32 @@
 				04EB7E5B288B0CF70046729E /* AppMenuKeys.swift */,
 			);
 			path = AppMenu;
+			sourceTree = "<group>";
+		};
+		04EB7E5F288C84E20046729E /* MainWindow */ = {
+			isa = PBXGroup;
+			children = (
+				04EB7E61288C8F4B0046729E /* MainWindowController */,
+				04EB7E60288C8F390046729E /* MainViewController */,
+			);
+			path = MainWindow;
+			sourceTree = "<group>";
+		};
+		04EB7E60288C8F390046729E /* MainViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F36C2BFF2476FFC500462C2D /* MainViewController.swift */,
+				04EB7E5D288B190E0046729E /* MainViewControllerView.swift */,
+			);
+			path = MainViewController;
+			sourceTree = "<group>";
+		};
+		04EB7E61288C8F4B0046729E /* MainWindowController */ = {
+			isa = PBXGroup;
+			children = (
+				04EB7E62288C8F820046729E /* MainWindowController.swift */,
+			);
+			path = MainWindowController;
 			sourceTree = "<group>";
 		};
 		71F970708108BB3CB4A8F62C /* Configuration */ = {
@@ -216,6 +243,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04EB7E56288B0B560046729E /* AppMenuProvider.swift in Sources */,
+				04EB7E63288C8F820046729E /* MainWindowController.swift in Sources */,
 				F36C2C002476FFC500462C2D /* MainViewController.swift in Sources */,
 				04EB7E5E288B190E0046729E /* MainViewControllerView.swift in Sources */,
 				F36C2BFE2476FFC500462C2D /* AppDelegate.swift in Sources */,
