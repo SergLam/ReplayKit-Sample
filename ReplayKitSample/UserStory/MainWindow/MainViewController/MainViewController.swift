@@ -1,28 +1,15 @@
 /*
-See LICENSE folder for this sample’s licensing information.
-
-Abstract:
-The app's main view controller object.
-*/
+ See LICENSE folder for this sample’s licensing information.
+ 
+ Abstract:
+ The app's main view controller object.
+ */
 
 import Cocoa
 import ReplayKit
 import Photos
 
-final class MainViewController: NSViewController,
-                      RPScreenRecorderDelegate,
-                      RPPreviewViewControllerDelegate,
-                      RPBroadcastControllerDelegate,
-                      RPBroadcastActivityControllerDelegate {
-    
-    // IBOutlets for the record, capture, and broadcast buttons.
-    @IBOutlet private var recordButton: NSButton!
-    @IBOutlet private var captureButton: NSButton!
-    @IBOutlet private var broadcastButton: NSButton!
-    @IBOutlet private var cameraCheckBox: NSButton!
-    @IBOutlet private var microphoneCheckBox: NSButton!
-    @IBOutlet private var clipButton: NSButton!
-    @IBOutlet private var getClipButton: NSButton!
+final class MainViewController: NSViewController {
     
     // Internal state variables.
     private var isActive = false
@@ -31,14 +18,15 @@ final class MainViewController: NSViewController,
     private var broadcastControl: RPBroadcastController!
     private var cameraView: NSView?
     
-    private let contentView: MainViewControllerView = MainViewControllerView(frame: NSRect.zero)
+    private let contentView: MainViewControllerView
     
     // MARK: - Life cycle
     deinit {
         
     }
     
-    init() {
+    init(rect: NSRect) {
+        contentView = MainViewControllerView(frame: rect)
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -52,6 +40,7 @@ final class MainViewController: NSViewController,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        contentView.delegate = self
         
         // Initialize the recording state.
         isActive = false
@@ -59,30 +48,11 @@ final class MainViewController: NSViewController,
         // Initialize the screen recorder delegate.
         RPScreenRecorder.shared().delegate = self
         
-        DispatchQueue.main.async {
-            // Set the buttons' enabled states.
-            self.recordButton.isEnabled = RPScreenRecorder.shared().isAvailable
-            self.captureButton.isEnabled = RPScreenRecorder.shared().isAvailable
-            self.broadcastButton.isEnabled = RPScreenRecorder.shared().isAvailable
-            self.clipButton.isEnabled = RPScreenRecorder.shared().isAvailable
-        }
-    }
-    
-    // MARK: - Screen Recorder Microphone / Camera Property methods
-    @IBAction func cameraButtonTapped(_ sender: NSButton) {
-        if cameraCheckBox.state == .on {
-            RPScreenRecorder.shared().isCameraEnabled = true
-        } else {
-            RPScreenRecorder.shared().isCameraEnabled = false
-        }
-    }
-    
-    @IBAction func microphoneButtonTapped(_ sender: NSButton) {
-        if microphoneCheckBox.state == .on {
-            RPScreenRecorder.shared().isMicrophoneEnabled = true
-        } else {
-            RPScreenRecorder.shared().isMicrophoneEnabled = false
-        }
+        let isEnabled = RPScreenRecorder.shared().isAvailable
+        contentView.setRecordButtonState(isEnabled: isEnabled)
+        contentView.setCaptureButtonState(isEnabled: isEnabled)
+        contentView.setBroadcastButtonState(isEnabled: isEnabled)
+        contentView.setClipButtonState(isEnabled: isEnabled)
     }
     
     func setupCameraView() {
@@ -110,18 +80,6 @@ final class MainViewController: NSViewController,
         DispatchQueue.main.async {
             // Remove the camera view from the main view when tearing down the camera.
             self.cameraView?.removeFromSuperview()
-        }
-    }
-    
-    // MARK: - In-App Recording
-    @IBAction func recordButtonTapped(_ sender: NSButton) {
-        // Check the internal recording state.
-        if isActive == false {
-            // If a recording isn't currently underway, start it.
-            startRecording()
-        } else {
-            // If a recording is active, the button stops it.
-            stopRecording()
         }
     }
     
@@ -180,45 +138,16 @@ final class MainViewController: NSViewController,
     
     func setRecordingState(active: Bool) {
         DispatchQueue.main.async {
-            if active == true {
-                // Set the button title.
-                print("started recording")
-                self.recordButton.title = "Stop Recording"
-            } else {
-                // Set the button title.
-                print("stopped recording")
-                self.recordButton.title = "Start Recording"
-            }
+            print(active ? "started recording" : "stopped recording")
+            self.contentView.setRecordButtonTitle(isRecording: active)
             
             // Set the internal recording state.
             self.isActive = active
             
             // Set the other buttons' isEnabled properties.
-            self.captureButton.isEnabled = !active
-            self.broadcastButton.isEnabled = !active
-            self.clipButton.isEnabled = !active
-        }
-    }
-    
-    // MARK: - RPPreviewViewController Delegate
-    func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
-        // This delegate method tells the app when the user finishes with the
-        // preview view controller sheet (when the user exits or cancels the sheet).
-        // End the presentation of the preview view controller here.
-        DispatchQueue.main.async {
-            NSApplication.shared.mainWindow?.endSheet(self.replayPreviewViewController)
-        }
-    }
-    
-    // MARK: - In-App Capture
-    @IBAction func captureButtonTapped(_ sender: NSButton) {
-        // Check the internal recording state.
-        if isActive == false {
-            // If a recording isn't active, the button starts the capture session.
-            startCapture()
-        } else {
-            // If a recording is active, the button stops the capture session.
-            stopCapture()
+            self.contentView.setCaptureButtonState(isEnabled: !active)
+            self.contentView.setBroadcastButtonState(isEnabled: !active)
+            self.contentView.setClipButtonState(isEnabled: !active)
         }
     }
     
@@ -295,36 +224,18 @@ final class MainViewController: NSViewController,
     }
     
     func setCaptureState(active: Bool) {
-        DispatchQueue.main.async {
-            if active == true {
-                // Set the button title.
-                self.captureButton.title = "Stop Capture"
-            } else {
-                // Set the button title.
-                self.captureButton.title = "Start Capture"
-            }
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.contentView.setCaptureButtonTitle(isCapturing: active)
             
             // Set the internal recording state.
-            self.isActive = active
+            strongSelf.isActive = active
             
             // Set the other buttons' isEnabled properties.
-            self.recordButton.isEnabled = !active
-            self.broadcastButton.isEnabled = !active
-            self.clipButton.isEnabled = !active
+            strongSelf.contentView.setRecordButtonState(isEnabled: !active)
+            strongSelf.contentView.setBroadcastButtonState(isEnabled: !active)
+            strongSelf.contentView.setClipButtonState(isEnabled: !active)
         }
-    }
-    
-    // MARK: - In-App Broadcast
-    @IBAction func broadcastButtonTapped(_ sender: NSButton) {
-        // Check the internal recording state.
-        if isActive == false {
-            // If not active, present the broadcast picker.
-            presentBroadcastPicker()
-        } else {
-            // If currently active, the button stops the broadcast session.
-            stopBroadcast()
-        }
-        
     }
     
     func presentBroadcastPicker() {
@@ -366,40 +277,17 @@ final class MainViewController: NSViewController,
     }
     
     func setBroadcastState(active: Bool) {
-        DispatchQueue.main.async {
-            if active == true {
-                // Set the button title.
-                self.broadcastButton.title = "Stop Broadcast"
-            } else {
-                // Set the button title.
-                self.broadcastButton.title = "Start Broadcast"
-            }
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.contentView.setBroadcastButtonTitle(isBroadcasting: true)
             
             // Set the internal recording state.
-            self.isActive = active
+            strongSelf.isActive = active
             
             // Set the other buttons' isEnabled properties.
-            self.recordButton.isEnabled = !active
-            self.captureButton.isEnabled = !active
-            self.clipButton.isEnabled = !active
-        }
-    }
-    
-    // MARK: - In-App Clip Recording
-    @IBAction func clipButtonTapped(_ sender: Any) {
-        // Check the internal recording state.
-        if isActive == false {
-            // If the recording isn't active, the button starts the clip buffering session.
-            startClipBuffering()
-        } else {
-            // If a recording is active, the button stops the clip buffering session.
-            stopClipBuffering()
-        }
-    }
-    
-    @IBAction func generateClipPressed(_ sender: Any) {
-        if self.isActive == true && self.getClipButton.isEnabled == true {
-            exportClip()
+            strongSelf.contentView.setRecordButtonState(isEnabled: !active)
+            strongSelf.contentView.setCaptureButtonState(isEnabled: !active)
+            strongSelf.contentView.setClipButtonState(isEnabled: !active)
         }
     }
     
@@ -434,32 +322,27 @@ final class MainViewController: NSViewController,
     }
     
     func setClipState(active: Bool) {
-        DispatchQueue.main.async {
-            if active == true {
-                // Set the button title.
-                self.clipButton.title = "Stop Clip"
-            } else {
-                // Set the button title.
-                self.clipButton.title = "Start Clip"
-            }
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.contentView.setClipButtonTitle(isCliping: active)
             
             // Set the internal recording state.
-            self.isActive = active
+            strongSelf.isActive = active
             
             // Set the getClip button.
-            self.getClipButton.isEnabled = active
+            strongSelf.contentView.setGetClipButtonState(isEnabled: active)
             
             // Set the other buttons' isEnabled properties.
-            self.recordButton.isEnabled = !active
-            self.broadcastButton.isEnabled = !active
-            self.captureButton.isEnabled = !active
+            strongSelf.contentView.setRecordButtonState(isEnabled: !active)
+            strongSelf.contentView.setBroadcastButtonState(isEnabled: !active)
+            strongSelf.contentView.setCaptureButtonState(isEnabled: !active)
         }
     }
     
     func exportClip() {
         let clipURL = getDirectory()
         let interval = TimeInterval(5)
-    
+        
         print("Generating clip at URL: ", clipURL)
         RPScreenRecorder.shared().exportClip(to: clipURL, duration: interval) { error in
             if error != nil {
@@ -480,7 +363,7 @@ final class MainViewController: NSViewController,
         tempPath.appendPathComponent(String.localizedStringWithFormat("output-%@.mp4", stringDate))
         return tempPath
     }
-        
+    
     func saveToPhotos(tempURL: URL) {
         PHPhotoLibrary.shared().performChanges {
             PHAssetChangeRequest.creationRequestForAssetFromVideo(atFileURL: tempURL)
@@ -492,8 +375,100 @@ final class MainViewController: NSViewController,
             }
         }
     }
+    
+}
 
-    // MARK: - RPBroadcastActivityController Delegate
+// MARK: - MainViewControllerViewDelegate
+extension MainViewController: MainViewControllerViewDelegate {
+    
+    func didTapCameraCheckBoxButton() {
+        if contentView.getCameraCheckBoxState() == .on {
+            RPScreenRecorder.shared().isCameraEnabled = true
+        } else {
+            RPScreenRecorder.shared().isCameraEnabled = false
+        }
+    }
+    
+    func didTapMicrophoneCheckBox() {
+        if contentView.getMicrophoneCheckBox() == .on {
+            RPScreenRecorder.shared().isMicrophoneEnabled = true
+        } else {
+            RPScreenRecorder.shared().isMicrophoneEnabled = false
+        }
+    }
+    
+    func didTapGetClipButton() {
+        if self.isActive == true && self.contentView.getClipButtonState() == true {
+            exportClip()
+        }
+    }
+    
+    func didTapRecordButton() {
+        // Check the internal recording state.
+        if isActive == false {
+            // If a recording isn't currently underway, start it.
+            startRecording()
+        } else {
+            // If a recording is active, the button stops it.
+            stopRecording()
+        }
+    }
+    
+    func didTapCaptureButton() {
+        // Check the internal recording state.
+        if isActive == false {
+            // If a recording isn't active, the button starts the capture session.
+            startCapture()
+        } else {
+            // If a recording is active, the button stops the capture session.
+            stopCapture()
+        }
+    }
+    
+    func didTapBroadcastButton() {
+        // Check the internal recording state.
+        if isActive == false {
+            // If not active, present the broadcast picker.
+            presentBroadcastPicker()
+        } else {
+            // If currently active, the button stops the broadcast session.
+            stopBroadcast()
+        }
+    }
+    
+    func didTapClipButton() {
+        // Check the internal recording state.
+        if isActive == false {
+            // If the recording isn't active, the button starts the clip buffering session.
+            startClipBuffering()
+        } else {
+            // If a recording is active, the button stops the clip buffering session.
+            stopClipBuffering()
+        }
+    }
+}
+
+// MARK: - RPPreviewViewControllerDelegate
+extension MainViewController: RPPreviewViewControllerDelegate {
+    
+    func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
+        // This delegate method tells the app when the user finishes with the
+        // preview view controller sheet (when the user exits or cancels the sheet).
+        // End the presentation of the preview view controller here.
+        DispatchQueue.main.async {
+            NSApplication.shared.mainWindow?.endSheet(self.replayPreviewViewController)
+        }
+    }
+}
+
+// MARK: - RPBroadcastControllerDelegate
+extension MainViewController: RPBroadcastControllerDelegate {
+    
+}
+
+// MARK: - RPBroadcastActivityControllerDelegate
+extension MainViewController: RPBroadcastActivityControllerDelegate {
+    
     func broadcastActivityController(_ broadcastActivityController: RPBroadcastActivityController,
                                      didFinishWith broadcastController: RPBroadcastController?,
                                      error: Error?) {
@@ -515,15 +490,20 @@ final class MainViewController: NSViewController,
             print("Error with broadcast activity controller delegate call didFinish")
         }
     }
+}
+
+// MARK: - RPScreenRecorderDelegate
+extension MainViewController: RPScreenRecorderDelegate {
     
-    // MARK: - RPScreenRecorder Delegate
+    /// This delegate call lets the developer know when the screen recorder's availability changes.
     func screenRecorderDidChangeAvailability(_ screenRecorder: RPScreenRecorder) {
-        // This delegate call lets the developer know when the screen recorder's availability changes.
-        DispatchQueue.main.async {
-            self.recordButton.isEnabled = screenRecorder.isAvailable
-            self.captureButton.isEnabled = screenRecorder.isAvailable
-            self.broadcastButton.isEnabled = screenRecorder.isAvailable
-            self.clipButton.isEnabled = screenRecorder.isAvailable
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            let isEnabled = screenRecorder.isAvailable
+            strongSelf.contentView.setRecordButtonState(isEnabled: isEnabled)
+            strongSelf.contentView.setCaptureButtonState(isEnabled: isEnabled)
+            strongSelf.contentView.setBroadcastButtonState(isEnabled: isEnabled)
+            strongSelf.contentView.setClipButtonState(isEnabled: isEnabled)
         }
     }
     
@@ -535,16 +515,16 @@ final class MainViewController: NSViewController,
             // Reset the UI state.
             print("inside delegate call")
             self.isActive = false
-            self.recordButton.title = "Start Recording"
-            self.captureButton.title = "Start Capture"
-            self.broadcastButton.title = "Start Broadcast"
-            self.clipButton.title = "Start Clips"
-            self.recordButton.isEnabled = true
-            self.captureButton.isEnabled = true
-            self.broadcastButton.isEnabled = true
-            self.clipButton.isEnabled = true
-            self.getClipButton.isHidden = true
-            self.getClipButton.isEnabled = false
+            self.contentView.setRecordButtonTitle(isRecording: false)
+            self.contentView.setCaptureButtonTitle(isCapturing: false)
+            self.contentView.setBroadcastButtonTitle(isBroadcasting: false)
+            self.contentView.setClipButtonTitle(isCliping: false)
+            self.contentView.setRecordButtonState(isEnabled: true)
+            self.contentView.setCaptureButtonState(isEnabled: true)
+            self.contentView.setBroadcastButtonState(isEnabled: true)
+            self.contentView.setClipButtonState(isEnabled: true)
+            self.contentView.setGetClipButtonVisibility(isHidden: true)
+            self.contentView.setGetClipButtonState(isEnabled: false)
             
             // Tear down the camera view.
             self.tearDownCameraView()
@@ -567,6 +547,7 @@ final class MainViewController: NSViewController,
     }
 }
 
+// MARK: - SwiftUI Preview
 #if DEBUG
 import SwiftUI
 
@@ -585,13 +566,13 @@ struct MainViewController_Previews: PreviewProvider {
             Group {
                 
                 NSViewControllerPreview {
-                    
-                    let vc = MainViewController()
+                    let rect = NSRect(x: 0, y: 0, width: 480, height: 270)
+                    let vc = MainViewController(rect: rect)
                     return vc
                 }
                 
             }.previewDevice(PreviewDevice(rawValue: deviceName))
-            .previewDisplayName(deviceName)
+                .previewDisplayName(deviceName)
         }
         
     }

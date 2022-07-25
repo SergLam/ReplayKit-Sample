@@ -29,7 +29,9 @@ final class MainViewControllerView: NSView {
     private let titleFieldText: String = "ReplayKit"
     
     private let mainVStack: NSStackView = NSStackView(frame: NSRect.zero)
-    private let mainVStackSpacing: CGFloat = 5.0
+    private let mainVStackSpacing: CGFloat = 20.0
+    
+    private let buttonsStackSpacing: CGFloat = 10.0
     
     private let topButtonsStack: NSStackView = NSStackView(frame: NSRect.zero)
     
@@ -127,6 +129,32 @@ final class MainViewControllerView: NSView {
         clipButton.title = isCliping ? clipButtonStopTitle : clipButtonStartTitle
     }
     
+    func setClipButtonState(isEnabled: Bool) {
+        clipButton.isEnabled = isEnabled
+    }
+    
+    func getCameraCheckBoxState() -> NSButton.StateValue {
+        return cameraCheckBox.state
+    }
+    
+    func getMicrophoneCheckBox() -> NSButton.StateValue {
+        return microphoneCheckBox.state
+    }
+    
+    /// Return `getClipButton` state.
+    /// - Returns: Bool flag, whether buttons is enabled.
+    func getClipButtonState() -> Bool {
+        return getClipButton.isEnabled
+    }
+    
+    func setGetClipButtonState(isEnabled: Bool) {
+        getClipButton.isEnabled = isEnabled
+    }
+    
+    func setGetClipButtonVisibility(isHidden: Bool) {
+        getClipButton.isHidden = isHidden
+    }
+    
     // MARK: - Private
     private func setupView() {
         setupLayout()
@@ -147,6 +175,7 @@ final class MainViewControllerView: NSView {
     private func setupLayout() {
         
         addSubview(titleField)
+        titleField.font = .systemFont(ofSize: 26, weight: .regular)
         
         titleField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -164,38 +193,14 @@ final class MainViewControllerView: NSView {
         NSLayoutConstraint.activate([
             mainVStack.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 15),
             mainVStack.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -15),
-            mainVStack.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor)
+            mainVStack.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -15)
         ])
-        
-        mainVStack.addArrangedSubview(bottomButtonsStack)
-        bottomButtonsStack.orientation = .horizontal
-        bottomButtonsStack.alignment = .leading
-        bottomButtonsStack.distribution = .fill
-        bottomButtonsStack.spacing = mainVStackSpacing
-        
-        bottomButtonsStack.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            bottomButtonsStack.leadingAnchor.constraint(equalTo: mainVStack.leadingAnchor),
-            bottomButtonsStack.leadingAnchor.constraint(equalTo: mainVStack.trailingAnchor)
-        ])
-        
-        bottomButtonsStack.addArrangedSubview(recordButton)
-        recordButton.title = recordButtonStartTitle
-        
-        bottomButtonsStack.addArrangedSubview(captureButton)
-        captureButton.title = captureButtonStartTitle
-        
-        bottomButtonsStack.addArrangedSubview(broadcastButton)
-        broadcastButton.title = broadcastButtonStartTitle
-        
-        bottomButtonsStack.addArrangedSubview(clipButton)
-        clipButton.title = clipButtonStartTitle
         
         mainVStack.addArrangedSubview(topButtonsStack)
         topButtonsStack.orientation = .horizontal
-        topButtonsStack.alignment = .leading
-        topButtonsStack.distribution = .fill
-        topButtonsStack.spacing = mainVStackSpacing
+        topButtonsStack.alignment = .width
+        topButtonsStack.distribution = .fillEqually
+        topButtonsStack.spacing = buttonsStackSpacing
         
         topButtonsStack.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -205,24 +210,49 @@ final class MainViewControllerView: NSView {
         
         topButtonsStack.addArrangedSubview(cameraCheckBox)
         cameraCheckBox.title = cameraCheckBoxTitle
+        cameraCheckBox.setButtonType(NSButton.ButtonType.switch)
         
         topButtonsStack.addArrangedSubview(microphoneCheckBox)
         microphoneCheckBox.title = microphoneCheckBoxTitle
+        microphoneCheckBox.setButtonType(NSButton.ButtonType.switch)
         
         topButtonsStack.addArrangedSubview(getClipButtonStack)
         getClipButtonStack.orientation = .horizontal
-        bottomButtonsStack.alignment = .trailing
-        bottomButtonsStack.distribution = .fill
-        bottomButtonsStack.spacing = mainVStackSpacing
-        
-        getClipButtonStack.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            getClipButtonStack.leadingAnchor.constraint(equalTo: microphoneCheckBox.trailingAnchor),
-            getClipButtonStack.trailingAnchor.constraint(equalTo: getClipButtonStack.trailingAnchor)
-        ])
+        getClipButtonStack.alignment = .trailing
+        getClipButtonStack.distribution = .fill
+        getClipButtonStack.spacing = buttonsStackSpacing
         
         getClipButtonStack.addArrangedSubview(getClipButton)
         getClipButton.title = getClipButtonTitle
+        getClipButton.bezelStyle = .rounded
+        
+        mainVStack.addArrangedSubview(bottomButtonsStack)
+        bottomButtonsStack.orientation = .horizontal
+        bottomButtonsStack.alignment = .width
+        bottomButtonsStack.distribution = .fillEqually
+        bottomButtonsStack.spacing = buttonsStackSpacing
+        
+        bottomButtonsStack.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            bottomButtonsStack.leadingAnchor.constraint(equalTo: mainVStack.leadingAnchor),
+            bottomButtonsStack.trailingAnchor.constraint(equalTo: mainVStack.trailingAnchor)
+        ])
+        
+        bottomButtonsStack.addArrangedSubview(recordButton)
+        recordButton.title = recordButtonStartTitle
+        recordButton.bezelStyle = .rounded
+        
+        bottomButtonsStack.addArrangedSubview(captureButton)
+        captureButton.title = captureButtonStartTitle
+        captureButton.bezelStyle = .rounded
+        
+        bottomButtonsStack.addArrangedSubview(broadcastButton)
+        broadcastButton.title = broadcastButtonStartTitle
+        broadcastButton.bezelStyle = .rounded
+        
+        bottomButtonsStack.addArrangedSubview(clipButton)
+        clipButton.title = clipButtonStartTitle
+        clipButton.bezelStyle = .rounded
     }
     
     // MARK: - Actions
@@ -275,20 +305,10 @@ struct MainViewControllerView_Previews: PreviewProvider {
     }
     
     static var previews: some SwiftUI.View {
-        
-        ForEach(devices, id: \.self) { deviceName in
-            VStack(alignment: .center, spacing: 10) {
-                
-                NSViewPreview {
-                    return MainViewControllerView(frame: NSRect.zero)
-                }
-                .frame(minWidth: 480, maxWidth: .infinity, minHeight: 270.0, maxHeight: .infinity, alignment: .center)
-                
-            }
-            .previewDevice(PreviewDevice(rawValue: deviceName))
-            .previewDisplayName(deviceName)
+        NSViewPreview {
+            return MainViewControllerView(frame: NSRect.zero)
         }
-        
+        .frame(minWidth: 480, maxWidth: .infinity, minHeight: 270.0, maxHeight: .infinity, alignment: .center)
     }
 }
 #endif
