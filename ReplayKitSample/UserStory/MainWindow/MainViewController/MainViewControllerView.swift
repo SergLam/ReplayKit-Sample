@@ -162,14 +162,26 @@ final class MainViewControllerView: NSView {
     }
     
     private func setupActions() {
-        cameraCheckBox.action = #selector(didTapCameraCheckBoxButton)
-        microphoneCheckBox.action = #selector(didTapMicrophoneCheckBox)
-        getClipButton.action = #selector(didTapGetClipButton)
+        cameraCheckBox.target = self
+        cameraCheckBox.action = #selector(didTapCameraCheckBoxButton(_:))
         
-        recordButton.action = #selector(didTapRecordButton)
-        captureButton.action = #selector(didTapCaptureButton)
-        broadcastButton.action = #selector(didTapBroadcastButton)
-        clipButton.action = #selector(didTapGetClipButton)
+        microphoneCheckBox.target = self
+        microphoneCheckBox.action = #selector(didTapMicrophoneCheckBox(_:))
+        
+        getClipButton.target = self
+        getClipButton.action = #selector(didTapGetClipButton(_:))
+        
+        recordButton.target = self
+        recordButton.action = #selector(didTapRecordButton(_:))
+        
+        captureButton.target = self
+        captureButton.action = #selector(didTapCaptureButton(_:))
+        
+        broadcastButton.target = self
+        broadcastButton.action = #selector(didTapBroadcastButton(_:))
+        
+        clipButton.target = self
+        clipButton.action = #selector(didTapGetClipButton(_:))
     }
     
     private func setupLayout() {
@@ -257,37 +269,37 @@ final class MainViewControllerView: NSView {
     
     // MARK: - Actions
     @objc
-    private func didTapCameraCheckBoxButton() {
+    private func didTapCameraCheckBoxButton(_ sender: NSButton) {
         delegate?.didTapCameraCheckBoxButton()
     }
     
     @objc
-    private func didTapMicrophoneCheckBox() {
+    private func didTapMicrophoneCheckBox(_ sender: NSButton) {
         delegate?.didTapMicrophoneCheckBox()
     }
     
     @objc
-    private func didTapGetClipButton() {
+    private func didTapGetClipButton(_ sender: NSButton) {
         delegate?.didTapGetClipButton()
     }
     
     @objc
-    private func didTapRecordButton() {
+    private func didTapRecordButton(_ sender: NSButton) {
         delegate?.didTapRecordButton()
     }
     
     @objc
-    private func didTapCaptureButton() {
+    private func didTapCaptureButton(_ sender: NSButton) {
         delegate?.didTapCaptureButton()
     }
     
     @objc
-    private func didTapBroadcastButton() {
+    private func didTapBroadcastButton(_ sender: NSButton) {
         delegate?.didTapBroadcastButton()
     }
     
     @objc
-    private func didTapClipButton() {
+    private func didTapClipButton(_ sender: NSButton) {
         delegate?.didTapClipButton()
     }
 }
